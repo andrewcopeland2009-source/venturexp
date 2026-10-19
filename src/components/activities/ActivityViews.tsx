@@ -183,8 +183,7 @@ export function MatchView({ activity, response, onChange, result, seed }: ViewPr
     const next = pairs.map((p) => (p === d ? -1 : p));
     next[activeTerm] = d;
     set(next);
-    const nextFree = termOrder.find((t) => next[t] < 0);
-    setActiveTerm(nextFree ?? null);
+    setActiveTerm(null);
   };
   const colorOf = (t: number) => PAIR_COLORS[termOrder.indexOf(t) % PAIR_COLORS.length];
 

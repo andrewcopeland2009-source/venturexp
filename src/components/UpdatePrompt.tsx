@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 import { RefreshCw } from 'lucide-react';
 import { Button } from './ui';
@@ -18,9 +19,16 @@ export function UpdatePrompt() {
     },
   });
 
+  // The "ready offline" note is informational: hide it on its own after a few seconds.
+  useEffect(() => {
+    if (!offlineReady) return;
+    const t = setTimeout(() => setOfflineReady(false), 5000);
+    return () => clearTimeout(t);
+  }, [offlineReady, setOfflineReady]);
+
   if (!needRefresh && !offlineReady) return null;
   return (
-    <div className="fixed inset-x-0 bottom-[calc(76px+env(safe-area-inset-bottom))] z-40 flex justify-center px-4 md:bottom-6" role="status">
+    <div className="fixed inset-x-0 top-0 z-40 flex justify-center px-4 pt-[calc(env(safe-area-inset-top)+8px)]" role="status">
       <div className="surface flex w-full max-w-md items-center gap-3 rounded-2xl p-3 pl-4">
         <p className="flex-1 text-sm">{needRefresh ? 'A new version of VentureXP is ready.' : 'VentureXP is ready to work offline.'}</p>
         {needRefresh ? (

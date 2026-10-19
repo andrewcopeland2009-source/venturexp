@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { AnimatePresence, motion } from 'motion/react';
 import { Check, ChevronLeft, Clock, Compass, GraduationCap, Megaphone, Rocket, TrendingUp, BookA } from 'lucide-react';
@@ -6,7 +6,7 @@ import { categories, playableCourses } from '@/content';
 import { recommendCourses } from '@/domain/recommend';
 import type { Experience, Goal, Preferences } from '@/domain/records';
 import { updatePrefs, updateProfile } from '@/db/progression';
-import { usePrefs } from '@/hooks/data';
+import { usePrefs, useProfile } from '@/hooks/data';
 import { Button, cx } from '@/components/ui';
 import { Icon } from '@/components/Icon';
 import { LogoMark } from '@/components/Logo';
@@ -38,6 +38,8 @@ const STEPS = 6;
 export default function Onboarding() {
   const navigate = useNavigate();
   const prefs = usePrefs();
+  const profile = useProfile();
+  const [target, setTarget] = useState<string | null>(null);
   const [step, setStep] = useState(0);
   const [interests, setInterests] = useState<string[]>([]);
   const [experience, setExperience] = useState<Experience>('beginner');
@@ -54,8 +56,13 @@ export default function Onboarding() {
     setSaving(true);
     await updatePrefs({ interests, experience, goals, dailyGoalMinutes: daily, timezone: prefs?.timezone });
     await updateProfile({ onboarded: true, nickname: nickname.trim().slice(0, 40), joinedAt: Date.now() });
-    navigate(to, { replace: true });
+    setTarget(to);
   }
+
+  // Navigate once the live profile reflects the save, so the onboarding guard doesn't bounce us back.
+  useEffect(() => {
+    if (target && profile?.onboarded) navigate(target, { replace: true });
+  }, [target, profile?.onboarded, navigate]);
 
   const next = () => setStep((s) => Math.min(STEPS - 1, s + 1));
   const canContinue = step !== 1 || interests.length > 0;

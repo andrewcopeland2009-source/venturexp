@@ -117,7 +117,8 @@ function LessonPlayer({ lessonId }: { lessonId: string }) {
   const progress = phase === 'intro' ? 0 : pos / total;
 
   return (
-    <div className="mx-auto flex min-h-dvh max-w-2xl flex-col px-4 pl-safe pr-safe sm:px-6">
+    <div className="pl-safe pr-safe">
+    <div className="mx-auto flex min-h-dvh max-w-2xl flex-col px-4 sm:px-6">
       {/* Top bar */}
       <div className="sticky top-0 z-20 -mx-4 flex min-h-[60px] items-center gap-3 bg-bg/95 px-4 pt-safe backdrop-blur sm:-mx-6 sm:px-6">
         <button onClick={() => setConfirmExit(true)} aria-label="Exit lesson" className="-ml-2 grid h-11 w-11 shrink-0 place-items-center rounded-xl text-muted hover:text-ink">
@@ -201,7 +202,7 @@ function LessonPlayer({ lessonId }: { lessonId: string }) {
                 </ul>
               )}
             </div>
-            <div className="sticky bottom-0 -mx-4 mt-6 border-t border-line bg-bg/95 px-4 py-3 pb-safe backdrop-blur sm:-mx-6 sm:px-6">
+            <div className="sticky bottom-0 -mx-4 mt-6 border-t border-line bg-bg/95 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur sm:-mx-6 sm:px-6">
               <Button block size="lg" onClick={() => setPhase('play')} autoFocus>
                 Start practice
               </Button>
@@ -239,6 +240,7 @@ function LessonPlayer({ lessonId }: { lessonId: string }) {
       >
         Answers so far count as practice, but the lesson won’t be marked complete until you finish it.
       </Dialog>
+    </div>
     </div>
   );
 }
