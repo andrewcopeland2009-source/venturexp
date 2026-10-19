@@ -1,4 +1,4 @@
-import Dexie, { type EntityTable } from 'dexie';
+import Dexie, { type DexieOptions, type EntityTable } from 'dexie';
 import type {
   AchievementUnlock,
   Attempt,
@@ -28,8 +28,8 @@ export class VentureDB extends Dexie {
   dailyActivity!: EntityTable<DailyActivity, 'day'>;
   simulationRuns!: EntityTable<SimulationRun, 'id'>;
 
-  constructor(name = 'venturexp') {
-    super(name);
+  constructor(name = 'venturexp', options?: DexieOptions) {
+    super(name, options);
     this.version(1).stores({
       meta: 'id',
       lessonProgress: 'lessonId, courseId, moduleId, status, lastPlayedAt',
