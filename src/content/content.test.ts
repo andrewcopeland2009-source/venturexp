@@ -86,3 +86,12 @@ describe('search', () => {
     expect(searchAll('zzqxj')).toEqual([]);
   });
 });
+
+describe('content volume', () => {
+  it('has six playable courses with 90 lessons and ≥360 activities', () => {
+    expect(playableCourses).toHaveLength(6);
+    const lessons = playableCourses.flatMap((c) => courseLessons(c));
+    expect(lessons).toHaveLength(90);
+    expect(lessons.reduce((n, l) => n + l.activities.length, 0)).toBeGreaterThanOrEqual(360);
+  });
+});

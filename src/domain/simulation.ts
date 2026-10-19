@@ -29,10 +29,10 @@ export interface ProductOption {
 }
 
 export const PRODUCTS: ProductOption[] = [
-  { id: 'tee', name: 'Graphic T-shirt', baseCost: 11, refPrice: 28, minPrice: 18, maxPrice: 45, baseDemand: 90, elasticity: 1.6, returnRate: 0.05, blurb: 'Popular and easy to sell, but lots of competition. Sizing causes some returns.' },
-  { id: 'hoodie', name: 'Hoodie', baseCost: 24, refPrice: 50, minPrice: 35, maxPrice: 75, baseDemand: 50, elasticity: 1.3, returnRate: 0.04, blurb: 'Higher price and profit per order, fewer orders. Seasonal in real life.' },
-  { id: 'mug', name: 'Ceramic mug', baseCost: 7, refPrice: 18, minPrice: 12, maxPrice: 30, baseDemand: 70, elasticity: 1.8, returnRate: 0.06, blurb: 'Cheap to make, giftable, but breakage in transit drives returns.' },
-  { id: 'poster', name: 'Art poster', baseCost: 9, refPrice: 24, minPrice: 15, maxPrice: 40, baseDemand: 45, elasticity: 1.2, returnRate: 0.03, blurb: 'Niche audience that cares about design more than price.' },
+  { id: 'tee', name: 'Graphic T-shirt', baseCost: 11, refPrice: 28, minPrice: 18, maxPrice: 45, baseDemand: 45, elasticity: 1.6, returnRate: 0.05, blurb: 'Popular and easy to sell, but lots of competition. Sizing causes some returns.' },
+  { id: 'hoodie', name: 'Hoodie', baseCost: 24, refPrice: 50, minPrice: 35, maxPrice: 75, baseDemand: 26, elasticity: 1.3, returnRate: 0.04, blurb: 'Higher price and profit per order, fewer orders. Seasonal in real life.' },
+  { id: 'mug', name: 'Ceramic mug', baseCost: 7, refPrice: 18, minPrice: 12, maxPrice: 30, baseDemand: 36, elasticity: 1.8, returnRate: 0.06, blurb: 'Cheap to make, giftable, but breakage in transit drives returns.' },
+  { id: 'poster', name: 'Art poster', baseCost: 9, refPrice: 24, minPrice: 15, maxPrice: 40, baseDemand: 24, elasticity: 1.2, returnRate: 0.03, blurb: 'Niche audience that cares about design more than price.' },
 ];
 
 export interface SupplierOption {

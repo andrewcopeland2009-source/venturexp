@@ -4,6 +4,8 @@ export default defineConfig({
   testDir: 'tests/e2e',
   timeout: 120_000,
   fullyParallel: false,
+  workers: 1,
+  expect: { timeout: 10_000 },
   reporter: 'list',
   use: {
     baseURL: 'http://localhost:4173',
