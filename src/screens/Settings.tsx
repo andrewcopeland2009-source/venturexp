@@ -12,6 +12,7 @@ import type { Experience, Goal, Preferences } from '@/domain/records';
 import { usePrefs } from '@/hooks/data';
 import { Button, Card, Dialog, PageHeader, SectionTitle, Segmented, Spinner, Toggle, cx } from '@/components/ui';
 import { BackupReminder } from './Backup';
+import { resetOnboardedFlag } from '@/onboardingFlag';
 
 const GOALS: { value: Goal; label: string }[] = [
   { value: 'start', label: 'Start a business' },
@@ -179,6 +180,7 @@ export default function Settings() {
               disabled={resetText.trim().toUpperCase() !== 'RESET'}
               onClick={async () => {
                 await resetAllProgress();
+                resetOnboardedFlag();
                 setConfirmReset(false);
                 navigate('/welcome', { replace: true });
               }}

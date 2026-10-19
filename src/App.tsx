@@ -26,6 +26,7 @@ import Profile from '@/screens/Profile';
 import Settings from '@/screens/Settings';
 import Backup from '@/screens/Backup';
 import NotFound from '@/screens/NotFound';
+import { wasJustOnboarded } from '@/onboardingFlag';
 
 /** Applies theme + motion preferences and routes first-time users to onboarding. */
 function Root() {
@@ -46,7 +47,7 @@ function Root() {
   }, [location.pathname]);
 
   if (!profile || !prefs) return <Spinner />;
-  if (!profile.onboarded && location.pathname !== '/welcome') return <Navigate to="/welcome" replace />;
+  if (!profile.onboarded && !wasJustOnboarded() && location.pathname !== '/welcome') return <Navigate to="/welcome" replace />;
 
   return (
     <MotionConfig reducedMotion={prefs.reducedMotion === 'on' ? 'always' : prefs.reducedMotion === 'off' ? 'never' : 'user'}>
