@@ -118,10 +118,12 @@ export function ActivityPlayer({
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="flex-1 pb-6">
-        <div className="mb-4 flex items-center gap-2">
-          <span className="rounded-full bg-elevated px-2.5 py-1 text-xs font-semibold text-muted">{ACTIVITY_LABEL[activity.type]}</span>
-          {retry && <span className="rounded-full bg-amber-soft px-2.5 py-1 text-xs font-semibold text-amber">Second try</span>}
-        </div>
+        <span className="sr-only">{ACTIVITY_LABEL[activity.type]}</span>
+        {retry && (
+          <div className="mb-3">
+            <span className="rounded-full bg-amber-soft px-2.5 py-1 text-xs font-semibold text-amber">Second try</span>
+          </div>
+        )}
         {view}
       </div>
 
